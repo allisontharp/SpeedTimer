@@ -156,7 +156,30 @@ Public Class CommonFunctions
 
     End Function
 
+    Public Function pll_scramble()
+        Dim i As Integer
+        Dim s As String = "("
 
+
+        If mainForm.PLLList.CheckedItems.Count <> 0 Then
+
+
+            For i = 0 To mainForm.PLLList.CheckedItems.Count - 1
+                s = s & """" & mainForm.PLLList.CheckedItems(i).ToString & ""","
+            Next i
+
+            s = s.TrimEnd(CChar(","))
+            s = s & ")"
+
+        End If
+
+        Dim selectQuery As String = "SELECT alg FROM algs WHERE alg_name_id in (SELECT id FROM alg_name WHERE name in "
+        selectQuery = selectQuery & s & ") ORDER BY RAND() LIMIT 1"
+
+        Dim result As String = mysqlquery(selectQuery)
+
+        mainForm.PLLScramble.Text = result
+    End Function
 
 
 End Class

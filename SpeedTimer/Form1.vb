@@ -333,4 +333,100 @@ Public Class mainForm
         obj.AlgNameLabel.Text = name
         obj.Show()
     End Sub
+
+    Private Sub PLLTimerButton_KeyDown(sender As Object, e As KeyEventArgs) Handles PLLTimerButton.KeyDown
+        ' User must hold timer for 0.5 second before letting go for timer to start
+        Dim pretimerelapsed As TimeSpan = Me.prestopwatch.Elapsed
+        pretimer.Start()
+        Me.prestopwatch.Start()
+
+        If pretimerelapsed.Seconds >= 0.5 Then
+            PLLTimerButton.Text = "Go!"
+            PLLTimerButton.BackColor = Color.LimeGreen
+
+        End If
+    End Sub
+
+    Private Sub PLLTimerButton_KeyUp(sender As Object, e As KeyEventArgs) Handles PLLTimerButton.KeyUp
+        Dim pretimerelapsed As TimeSpan = Me.prestopwatch.Elapsed
+
+        Dim submitQuery As String = "INSERT "
+
+
+
+
+
+        'conn = New MySqlConnection(constr)
+        'conn.Open()
+
+        'pretimer.Stop()
+        'Me.prestopwatch.Stop()
+
+        'If Not timerOn Then
+        '    If pretimerelapsed.Seconds >= 0.5 Then
+        '        'TODO: user must hold timer for 1 second before letting go
+
+        '        Timer1.Start()
+        '        Me.stopwatch.Start()
+        '        PLLTimerButton.Text = "Stop"
+        '        PLLTimerButton.BackColor = Color.Red
+        '        timerOn = 1
+
+
+        '    Else
+        '        PLLTimerButton.Text = "Ready!"
+        '        PLLTimerButton.BackColor = Color.Yellow
+        '        timerOn = 0
+        '        Me.stopwatch.Reset()
+        '    End If
+        'Else
+        '    Timer1.Stop()
+        '    Me.stopwatch.Stop()
+
+
+
+        '    ' Plot Each Time
+        '    'totalAvgChart.Series(0).Points.Add(Val(timerLabel.Text))
+        '    ' totalAvgChart.Series(1).Points.Add(Val(timerLabel.Text) / 2)
+
+        '    ' Write to Database
+        '    cmd.Parameters.AddWithValue("@time", Val(timerLabel.Text))
+        '    cmd.Parameters.AddWithValue("@startcolor", startColor)
+        '    cmd.Parameters.AddWithValue("@scramble", "" & scrambleLabel.Text & "")
+
+        '    Try
+        '        cmd.ExecuteNonQuery()
+        '    Catch ex As MySqlException
+        '        MsgBox(ex.ToString())
+        '    Finally
+
+        '    End Try
+
+
+        '    '' Update Stats!
+        '    'funcs.updateTimes()
+        '    'funcs.scramble()
+
+        '    ' Reset timer
+        '    timerButton.Text = "Ready!"
+        '    timerButton.BackColor = Color.Yellow
+        '    timerOn = 0
+        '    Me.stopwatch.Reset()
+        'End If
+
+
+        'Me.prestopwatch.Reset()
+
+
+
+    End Sub
+
+
+    Private Sub PLLScrambleButton_Click(sender As Object, e As EventArgs) Handles PLLScrambleButton.Click
+        funcs.pll_scramble()
+    End Sub
+
+    Private Sub PLLTimerButton_Click(sender As Object, e As EventArgs) Handles PLLTimerButton.Click
+
+    End Sub
 End Class
