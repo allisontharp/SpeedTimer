@@ -27,6 +27,7 @@ Partial Class mainForm
         Dim Legend1 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
         Dim Series1 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
         Dim Series2 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(mainForm))
         Me.timerLabel = New System.Windows.Forms.Label()
         Me.timerButton = New System.Windows.Forms.Button()
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
@@ -128,6 +129,16 @@ Partial Class mainForm
         Me.DeleteSolveToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.scrambleLabel = New System.Windows.Forms.Label()
         Me.scrambleButton = New System.Windows.Forms.Button()
+        Me.TabControl2 = New System.Windows.Forms.TabControl()
+        Me.SpeedSolvePage = New System.Windows.Forms.TabPage()
+        Me.PLLPage = New System.Windows.Forms.TabPage()
+        Me.PLLAlg = New System.Windows.Forms.Label()
+        Me.PLLPicture = New System.Windows.Forms.PictureBox()
+        Me.Label9 = New System.Windows.Forms.Label()
+        Me.PLLList = New System.Windows.Forms.CheckedListBox()
+        Me.PLLImageList = New System.Windows.Forms.ImageList(Me.components)
+        Me.UpdateAlgStrip = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.AddAlgorithmToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         CType(Me.totalAvgChart, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
         Me.TabControl1.SuspendLayout()
@@ -135,13 +146,18 @@ Partial Class mainForm
         Me.recentsolvesDataPG.SuspendLayout()
         CType(Me.recentSolvesDataGrid, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.recentSolves_Strip.SuspendLayout()
+        Me.TabControl2.SuspendLayout()
+        Me.SpeedSolvePage.SuspendLayout()
+        Me.PLLPage.SuspendLayout()
+        CType(Me.PLLPicture, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.UpdateAlgStrip.SuspendLayout()
         Me.SuspendLayout()
         '
         'timerLabel
         '
         Me.timerLabel.AutoSize = True
         Me.timerLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 50.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.timerLabel.Location = New System.Drawing.Point(8, 55)
+        Me.timerLabel.Location = New System.Drawing.Point(23, 39)
         Me.timerLabel.Name = "timerLabel"
         Me.timerLabel.Size = New System.Drawing.Size(200, 76)
         Me.timerLabel.TabIndex = 0
@@ -154,7 +170,7 @@ Partial Class mainForm
         Me.timerButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Yellow
         Me.timerButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Yellow
         Me.timerButton.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.timerButton.Location = New System.Drawing.Point(21, 139)
+        Me.timerButton.Location = New System.Drawing.Point(36, 123)
         Me.timerButton.Name = "timerButton"
         Me.timerButton.Size = New System.Drawing.Size(158, 83)
         Me.timerButton.TabIndex = 1
@@ -199,9 +215,9 @@ Partial Class mainForm
         Me.GroupBox1.Controls.Add(Me.Label2)
         Me.GroupBox1.Controls.Add(Me.bestLabel)
         Me.GroupBox1.Controls.Add(Me.Label1)
-        Me.GroupBox1.Location = New System.Drawing.Point(12, 307)
+        Me.GroupBox1.Location = New System.Drawing.Point(27, 291)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(158, 210)
+        Me.GroupBox1.Size = New System.Drawing.Size(158, 102)
         Me.GroupBox1.TabIndex = 3
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Stats"
@@ -283,7 +299,7 @@ Partial Class mainForm
         Me.whiteCB.AutoSize = True
         Me.whiteCB.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.whiteCB.ForeColor = System.Drawing.Color.White
-        Me.whiteCB.Location = New System.Drawing.Point(319, 31)
+        Me.whiteCB.Location = New System.Drawing.Point(334, 15)
         Me.whiteCB.Name = "whiteCB"
         Me.whiteCB.Size = New System.Drawing.Size(68, 21)
         Me.whiteCB.TabIndex = 10
@@ -295,7 +311,7 @@ Partial Class mainForm
         Me.greenCB.AutoSize = True
         Me.greenCB.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.greenCB.ForeColor = System.Drawing.Color.Lime
-        Me.greenCB.Location = New System.Drawing.Point(625, 148)
+        Me.greenCB.Location = New System.Drawing.Point(640, 132)
         Me.greenCB.Name = "greenCB"
         Me.greenCB.Size = New System.Drawing.Size(72, 21)
         Me.greenCB.TabIndex = 11
@@ -307,7 +323,7 @@ Partial Class mainForm
         Me.yellowCB.AutoSize = True
         Me.yellowCB.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.yellowCB.ForeColor = System.Drawing.Color.Yellow
-        Me.yellowCB.Location = New System.Drawing.Point(319, 148)
+        Me.yellowCB.Location = New System.Drawing.Point(334, 132)
         Me.yellowCB.Name = "yellowCB"
         Me.yellowCB.Size = New System.Drawing.Size(73, 21)
         Me.yellowCB.TabIndex = 12
@@ -319,7 +335,7 @@ Partial Class mainForm
         Me.redCB.AutoSize = True
         Me.redCB.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.redCB.ForeColor = System.Drawing.Color.Red
-        Me.redCB.Location = New System.Drawing.Point(468, 148)
+        Me.redCB.Location = New System.Drawing.Point(483, 132)
         Me.redCB.Name = "redCB"
         Me.redCB.Size = New System.Drawing.Size(56, 21)
         Me.redCB.TabIndex = 15
@@ -331,7 +347,7 @@ Partial Class mainForm
         Me.blueCB.AutoSize = True
         Me.blueCB.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.blueCB.ForeColor = System.Drawing.Color.Blue
-        Me.blueCB.Location = New System.Drawing.Point(625, 31)
+        Me.blueCB.Location = New System.Drawing.Point(640, 15)
         Me.blueCB.Name = "blueCB"
         Me.blueCB.Size = New System.Drawing.Size(59, 21)
         Me.blueCB.TabIndex = 14
@@ -343,7 +359,7 @@ Partial Class mainForm
         Me.orangeCB.AutoSize = True
         Me.orangeCB.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.orangeCB.ForeColor = System.Drawing.Color.Orange
-        Me.orangeCB.Location = New System.Drawing.Point(468, 31)
+        Me.orangeCB.Location = New System.Drawing.Point(483, 15)
         Me.orangeCB.Name = "orangeCB"
         Me.orangeCB.Size = New System.Drawing.Size(81, 21)
         Me.orangeCB.TabIndex = 13
@@ -353,7 +369,7 @@ Partial Class mainForm
         'whiteWorst
         '
         Me.whiteWorst.AutoSize = True
-        Me.whiteWorst.Location = New System.Drawing.Point(387, 95)
+        Me.whiteWorst.Location = New System.Drawing.Point(402, 79)
         Me.whiteWorst.Name = "whiteWorst"
         Me.whiteWorst.Size = New System.Drawing.Size(34, 13)
         Me.whiteWorst.TabIndex = 15
@@ -362,7 +378,7 @@ Partial Class mainForm
         'Label6
         '
         Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(316, 95)
+        Me.Label6.Location = New System.Drawing.Point(331, 79)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(41, 13)
         Me.Label6.TabIndex = 14
@@ -371,7 +387,7 @@ Partial Class mainForm
         'whiteAo100
         '
         Me.whiteAo100.AutoSize = True
-        Me.whiteAo100.Location = New System.Drawing.Point(387, 120)
+        Me.whiteAo100.Location = New System.Drawing.Point(402, 104)
         Me.whiteAo100.Name = "whiteAo100"
         Me.whiteAo100.Size = New System.Drawing.Size(34, 13)
         Me.whiteAo100.TabIndex = 13
@@ -380,7 +396,7 @@ Partial Class mainForm
         'Label8
         '
         Me.Label8.AutoSize = True
-        Me.Label8.Location = New System.Drawing.Point(316, 120)
+        Me.Label8.Location = New System.Drawing.Point(331, 104)
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(41, 13)
         Me.Label8.TabIndex = 12
@@ -389,7 +405,7 @@ Partial Class mainForm
         'whiteAo5
         '
         Me.whiteAo5.AutoSize = True
-        Me.whiteAo5.Location = New System.Drawing.Point(387, 107)
+        Me.whiteAo5.Location = New System.Drawing.Point(402, 91)
         Me.whiteAo5.Name = "whiteAo5"
         Me.whiteAo5.Size = New System.Drawing.Size(34, 13)
         Me.whiteAo5.TabIndex = 11
@@ -398,7 +414,7 @@ Partial Class mainForm
         'Label10
         '
         Me.Label10.AutoSize = True
-        Me.Label10.Location = New System.Drawing.Point(316, 107)
+        Me.Label10.Location = New System.Drawing.Point(331, 91)
         Me.Label10.Name = "Label10"
         Me.Label10.Size = New System.Drawing.Size(29, 13)
         Me.Label10.TabIndex = 10
@@ -407,7 +423,7 @@ Partial Class mainForm
         'whiteBest
         '
         Me.whiteBest.AutoSize = True
-        Me.whiteBest.Location = New System.Drawing.Point(387, 83)
+        Me.whiteBest.Location = New System.Drawing.Point(402, 67)
         Me.whiteBest.Name = "whiteBest"
         Me.whiteBest.Size = New System.Drawing.Size(34, 13)
         Me.whiteBest.TabIndex = 9
@@ -416,7 +432,7 @@ Partial Class mainForm
         'Label12
         '
         Me.Label12.AutoSize = True
-        Me.Label12.Location = New System.Drawing.Point(316, 83)
+        Me.Label12.Location = New System.Drawing.Point(331, 67)
         Me.Label12.Name = "Label12"
         Me.Label12.Size = New System.Drawing.Size(34, 13)
         Me.Label12.TabIndex = 8
@@ -425,7 +441,7 @@ Partial Class mainForm
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(316, 55)
+        Me.Label3.Location = New System.Drawing.Point(331, 39)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(69, 13)
         Me.Label3.TabIndex = 16
@@ -434,7 +450,7 @@ Partial Class mainForm
         'Label7
         '
         Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(316, 68)
+        Me.Label7.Location = New System.Drawing.Point(331, 52)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(72, 13)
         Me.Label7.TabIndex = 17
@@ -443,7 +459,7 @@ Partial Class mainForm
         'whiteToday
         '
         Me.whiteToday.AutoSize = True
-        Me.whiteToday.Location = New System.Drawing.Point(387, 68)
+        Me.whiteToday.Location = New System.Drawing.Point(402, 52)
         Me.whiteToday.Name = "whiteToday"
         Me.whiteToday.Size = New System.Drawing.Size(13, 13)
         Me.whiteToday.TabIndex = 18
@@ -452,7 +468,7 @@ Partial Class mainForm
         'whiteTotal
         '
         Me.whiteTotal.AutoSize = True
-        Me.whiteTotal.Location = New System.Drawing.Point(387, 55)
+        Me.whiteTotal.Location = New System.Drawing.Point(402, 39)
         Me.whiteTotal.Name = "whiteTotal"
         Me.whiteTotal.Size = New System.Drawing.Size(13, 13)
         Me.whiteTotal.TabIndex = 19
@@ -461,7 +477,7 @@ Partial Class mainForm
         'yellowTotal
         '
         Me.yellowTotal.AutoSize = True
-        Me.yellowTotal.Location = New System.Drawing.Point(387, 172)
+        Me.yellowTotal.Location = New System.Drawing.Point(402, 156)
         Me.yellowTotal.Name = "yellowTotal"
         Me.yellowTotal.Size = New System.Drawing.Size(13, 13)
         Me.yellowTotal.TabIndex = 31
@@ -470,7 +486,7 @@ Partial Class mainForm
         'yellowToday
         '
         Me.yellowToday.AutoSize = True
-        Me.yellowToday.Location = New System.Drawing.Point(387, 185)
+        Me.yellowToday.Location = New System.Drawing.Point(402, 169)
         Me.yellowToday.Name = "yellowToday"
         Me.yellowToday.Size = New System.Drawing.Size(13, 13)
         Me.yellowToday.TabIndex = 30
@@ -479,7 +495,7 @@ Partial Class mainForm
         'Label13
         '
         Me.Label13.AutoSize = True
-        Me.Label13.Location = New System.Drawing.Point(316, 185)
+        Me.Label13.Location = New System.Drawing.Point(331, 169)
         Me.Label13.Name = "Label13"
         Me.Label13.Size = New System.Drawing.Size(72, 13)
         Me.Label13.TabIndex = 29
@@ -488,7 +504,7 @@ Partial Class mainForm
         'Label14
         '
         Me.Label14.AutoSize = True
-        Me.Label14.Location = New System.Drawing.Point(316, 172)
+        Me.Label14.Location = New System.Drawing.Point(331, 156)
         Me.Label14.Name = "Label14"
         Me.Label14.Size = New System.Drawing.Size(69, 13)
         Me.Label14.TabIndex = 28
@@ -497,7 +513,7 @@ Partial Class mainForm
         'yellowWorst
         '
         Me.yellowWorst.AutoSize = True
-        Me.yellowWorst.Location = New System.Drawing.Point(387, 212)
+        Me.yellowWorst.Location = New System.Drawing.Point(402, 196)
         Me.yellowWorst.Name = "yellowWorst"
         Me.yellowWorst.Size = New System.Drawing.Size(34, 13)
         Me.yellowWorst.TabIndex = 27
@@ -506,7 +522,7 @@ Partial Class mainForm
         'Label16
         '
         Me.Label16.AutoSize = True
-        Me.Label16.Location = New System.Drawing.Point(316, 212)
+        Me.Label16.Location = New System.Drawing.Point(331, 196)
         Me.Label16.Name = "Label16"
         Me.Label16.Size = New System.Drawing.Size(41, 13)
         Me.Label16.TabIndex = 26
@@ -515,7 +531,7 @@ Partial Class mainForm
         'yellowAo100
         '
         Me.yellowAo100.AutoSize = True
-        Me.yellowAo100.Location = New System.Drawing.Point(387, 237)
+        Me.yellowAo100.Location = New System.Drawing.Point(402, 221)
         Me.yellowAo100.Name = "yellowAo100"
         Me.yellowAo100.Size = New System.Drawing.Size(34, 13)
         Me.yellowAo100.TabIndex = 25
@@ -524,7 +540,7 @@ Partial Class mainForm
         'Label18
         '
         Me.Label18.AutoSize = True
-        Me.Label18.Location = New System.Drawing.Point(316, 237)
+        Me.Label18.Location = New System.Drawing.Point(331, 221)
         Me.Label18.Name = "Label18"
         Me.Label18.Size = New System.Drawing.Size(41, 13)
         Me.Label18.TabIndex = 24
@@ -533,7 +549,7 @@ Partial Class mainForm
         'yellowAo5
         '
         Me.yellowAo5.AutoSize = True
-        Me.yellowAo5.Location = New System.Drawing.Point(387, 224)
+        Me.yellowAo5.Location = New System.Drawing.Point(402, 208)
         Me.yellowAo5.Name = "yellowAo5"
         Me.yellowAo5.Size = New System.Drawing.Size(34, 13)
         Me.yellowAo5.TabIndex = 23
@@ -542,7 +558,7 @@ Partial Class mainForm
         'Label20
         '
         Me.Label20.AutoSize = True
-        Me.Label20.Location = New System.Drawing.Point(316, 224)
+        Me.Label20.Location = New System.Drawing.Point(331, 208)
         Me.Label20.Name = "Label20"
         Me.Label20.Size = New System.Drawing.Size(29, 13)
         Me.Label20.TabIndex = 22
@@ -551,7 +567,7 @@ Partial Class mainForm
         'yellowBest
         '
         Me.yellowBest.AutoSize = True
-        Me.yellowBest.Location = New System.Drawing.Point(387, 200)
+        Me.yellowBest.Location = New System.Drawing.Point(402, 184)
         Me.yellowBest.Name = "yellowBest"
         Me.yellowBest.Size = New System.Drawing.Size(34, 13)
         Me.yellowBest.TabIndex = 21
@@ -560,7 +576,7 @@ Partial Class mainForm
         'Label22
         '
         Me.Label22.AutoSize = True
-        Me.Label22.Location = New System.Drawing.Point(316, 200)
+        Me.Label22.Location = New System.Drawing.Point(331, 184)
         Me.Label22.Name = "Label22"
         Me.Label22.Size = New System.Drawing.Size(34, 13)
         Me.Label22.TabIndex = 20
@@ -569,7 +585,7 @@ Partial Class mainForm
         'redTotal
         '
         Me.redTotal.AutoSize = True
-        Me.redTotal.Location = New System.Drawing.Point(536, 172)
+        Me.redTotal.Location = New System.Drawing.Point(551, 156)
         Me.redTotal.Name = "redTotal"
         Me.redTotal.Size = New System.Drawing.Size(13, 13)
         Me.redTotal.TabIndex = 43
@@ -578,7 +594,7 @@ Partial Class mainForm
         'redToday
         '
         Me.redToday.AutoSize = True
-        Me.redToday.Location = New System.Drawing.Point(536, 185)
+        Me.redToday.Location = New System.Drawing.Point(551, 169)
         Me.redToday.Name = "redToday"
         Me.redToday.Size = New System.Drawing.Size(13, 13)
         Me.redToday.TabIndex = 42
@@ -587,7 +603,7 @@ Partial Class mainForm
         'Label15
         '
         Me.Label15.AutoSize = True
-        Me.Label15.Location = New System.Drawing.Point(465, 185)
+        Me.Label15.Location = New System.Drawing.Point(480, 169)
         Me.Label15.Name = "Label15"
         Me.Label15.Size = New System.Drawing.Size(72, 13)
         Me.Label15.TabIndex = 41
@@ -596,7 +612,7 @@ Partial Class mainForm
         'Label17
         '
         Me.Label17.AutoSize = True
-        Me.Label17.Location = New System.Drawing.Point(465, 172)
+        Me.Label17.Location = New System.Drawing.Point(480, 156)
         Me.Label17.Name = "Label17"
         Me.Label17.Size = New System.Drawing.Size(69, 13)
         Me.Label17.TabIndex = 40
@@ -605,7 +621,7 @@ Partial Class mainForm
         'redWorst
         '
         Me.redWorst.AutoSize = True
-        Me.redWorst.Location = New System.Drawing.Point(536, 212)
+        Me.redWorst.Location = New System.Drawing.Point(551, 196)
         Me.redWorst.Name = "redWorst"
         Me.redWorst.Size = New System.Drawing.Size(34, 13)
         Me.redWorst.TabIndex = 39
@@ -614,7 +630,7 @@ Partial Class mainForm
         'Label21
         '
         Me.Label21.AutoSize = True
-        Me.Label21.Location = New System.Drawing.Point(465, 212)
+        Me.Label21.Location = New System.Drawing.Point(480, 196)
         Me.Label21.Name = "Label21"
         Me.Label21.Size = New System.Drawing.Size(41, 13)
         Me.Label21.TabIndex = 38
@@ -623,7 +639,7 @@ Partial Class mainForm
         'redAo100
         '
         Me.redAo100.AutoSize = True
-        Me.redAo100.Location = New System.Drawing.Point(536, 237)
+        Me.redAo100.Location = New System.Drawing.Point(551, 221)
         Me.redAo100.Name = "redAo100"
         Me.redAo100.Size = New System.Drawing.Size(34, 13)
         Me.redAo100.TabIndex = 37
@@ -632,7 +648,7 @@ Partial Class mainForm
         'Label24
         '
         Me.Label24.AutoSize = True
-        Me.Label24.Location = New System.Drawing.Point(465, 237)
+        Me.Label24.Location = New System.Drawing.Point(480, 221)
         Me.Label24.Name = "Label24"
         Me.Label24.Size = New System.Drawing.Size(41, 13)
         Me.Label24.TabIndex = 36
@@ -641,7 +657,7 @@ Partial Class mainForm
         'redAo5
         '
         Me.redAo5.AutoSize = True
-        Me.redAo5.Location = New System.Drawing.Point(536, 224)
+        Me.redAo5.Location = New System.Drawing.Point(551, 208)
         Me.redAo5.Name = "redAo5"
         Me.redAo5.Size = New System.Drawing.Size(34, 13)
         Me.redAo5.TabIndex = 35
@@ -650,7 +666,7 @@ Partial Class mainForm
         'Label26
         '
         Me.Label26.AutoSize = True
-        Me.Label26.Location = New System.Drawing.Point(465, 224)
+        Me.Label26.Location = New System.Drawing.Point(480, 208)
         Me.Label26.Name = "Label26"
         Me.Label26.Size = New System.Drawing.Size(29, 13)
         Me.Label26.TabIndex = 34
@@ -659,7 +675,7 @@ Partial Class mainForm
         'redBest
         '
         Me.redBest.AutoSize = True
-        Me.redBest.Location = New System.Drawing.Point(536, 200)
+        Me.redBest.Location = New System.Drawing.Point(551, 184)
         Me.redBest.Name = "redBest"
         Me.redBest.Size = New System.Drawing.Size(34, 13)
         Me.redBest.TabIndex = 33
@@ -668,7 +684,7 @@ Partial Class mainForm
         'Label28
         '
         Me.Label28.AutoSize = True
-        Me.Label28.Location = New System.Drawing.Point(465, 200)
+        Me.Label28.Location = New System.Drawing.Point(480, 184)
         Me.Label28.Name = "Label28"
         Me.Label28.Size = New System.Drawing.Size(34, 13)
         Me.Label28.TabIndex = 32
@@ -677,7 +693,7 @@ Partial Class mainForm
         'greenTotal
         '
         Me.greenTotal.AutoSize = True
-        Me.greenTotal.Location = New System.Drawing.Point(693, 169)
+        Me.greenTotal.Location = New System.Drawing.Point(708, 153)
         Me.greenTotal.Name = "greenTotal"
         Me.greenTotal.Size = New System.Drawing.Size(13, 13)
         Me.greenTotal.TabIndex = 55
@@ -686,7 +702,7 @@ Partial Class mainForm
         'greenToday
         '
         Me.greenToday.AutoSize = True
-        Me.greenToday.Location = New System.Drawing.Point(693, 182)
+        Me.greenToday.Location = New System.Drawing.Point(708, 166)
         Me.greenToday.Name = "greenToday"
         Me.greenToday.Size = New System.Drawing.Size(13, 13)
         Me.greenToday.TabIndex = 54
@@ -695,7 +711,7 @@ Partial Class mainForm
         'Label19
         '
         Me.Label19.AutoSize = True
-        Me.Label19.Location = New System.Drawing.Point(622, 182)
+        Me.Label19.Location = New System.Drawing.Point(637, 166)
         Me.Label19.Name = "Label19"
         Me.Label19.Size = New System.Drawing.Size(72, 13)
         Me.Label19.TabIndex = 53
@@ -704,7 +720,7 @@ Partial Class mainForm
         'Label23
         '
         Me.Label23.AutoSize = True
-        Me.Label23.Location = New System.Drawing.Point(622, 169)
+        Me.Label23.Location = New System.Drawing.Point(637, 153)
         Me.Label23.Name = "Label23"
         Me.Label23.Size = New System.Drawing.Size(69, 13)
         Me.Label23.TabIndex = 52
@@ -713,7 +729,7 @@ Partial Class mainForm
         'greenWorst
         '
         Me.greenWorst.AutoSize = True
-        Me.greenWorst.Location = New System.Drawing.Point(693, 209)
+        Me.greenWorst.Location = New System.Drawing.Point(708, 193)
         Me.greenWorst.Name = "greenWorst"
         Me.greenWorst.Size = New System.Drawing.Size(34, 13)
         Me.greenWorst.TabIndex = 51
@@ -722,7 +738,7 @@ Partial Class mainForm
         'Label27
         '
         Me.Label27.AutoSize = True
-        Me.Label27.Location = New System.Drawing.Point(622, 209)
+        Me.Label27.Location = New System.Drawing.Point(637, 193)
         Me.Label27.Name = "Label27"
         Me.Label27.Size = New System.Drawing.Size(41, 13)
         Me.Label27.TabIndex = 50
@@ -731,7 +747,7 @@ Partial Class mainForm
         'greenAo100
         '
         Me.greenAo100.AutoSize = True
-        Me.greenAo100.Location = New System.Drawing.Point(693, 234)
+        Me.greenAo100.Location = New System.Drawing.Point(708, 218)
         Me.greenAo100.Name = "greenAo100"
         Me.greenAo100.Size = New System.Drawing.Size(34, 13)
         Me.greenAo100.TabIndex = 49
@@ -740,7 +756,7 @@ Partial Class mainForm
         'Label30
         '
         Me.Label30.AutoSize = True
-        Me.Label30.Location = New System.Drawing.Point(622, 234)
+        Me.Label30.Location = New System.Drawing.Point(637, 218)
         Me.Label30.Name = "Label30"
         Me.Label30.Size = New System.Drawing.Size(41, 13)
         Me.Label30.TabIndex = 48
@@ -749,7 +765,7 @@ Partial Class mainForm
         'greenAo5
         '
         Me.greenAo5.AutoSize = True
-        Me.greenAo5.Location = New System.Drawing.Point(693, 221)
+        Me.greenAo5.Location = New System.Drawing.Point(708, 205)
         Me.greenAo5.Name = "greenAo5"
         Me.greenAo5.Size = New System.Drawing.Size(34, 13)
         Me.greenAo5.TabIndex = 47
@@ -758,7 +774,7 @@ Partial Class mainForm
         'Label32
         '
         Me.Label32.AutoSize = True
-        Me.Label32.Location = New System.Drawing.Point(622, 221)
+        Me.Label32.Location = New System.Drawing.Point(637, 205)
         Me.Label32.Name = "Label32"
         Me.Label32.Size = New System.Drawing.Size(29, 13)
         Me.Label32.TabIndex = 46
@@ -767,7 +783,7 @@ Partial Class mainForm
         'greenBest
         '
         Me.greenBest.AutoSize = True
-        Me.greenBest.Location = New System.Drawing.Point(693, 197)
+        Me.greenBest.Location = New System.Drawing.Point(708, 181)
         Me.greenBest.Name = "greenBest"
         Me.greenBest.Size = New System.Drawing.Size(34, 13)
         Me.greenBest.TabIndex = 45
@@ -776,7 +792,7 @@ Partial Class mainForm
         'Label34
         '
         Me.Label34.AutoSize = True
-        Me.Label34.Location = New System.Drawing.Point(622, 197)
+        Me.Label34.Location = New System.Drawing.Point(637, 181)
         Me.Label34.Name = "Label34"
         Me.Label34.Size = New System.Drawing.Size(34, 13)
         Me.Label34.TabIndex = 44
@@ -785,7 +801,7 @@ Partial Class mainForm
         'orangeTotal
         '
         Me.orangeTotal.AutoSize = True
-        Me.orangeTotal.Location = New System.Drawing.Point(536, 53)
+        Me.orangeTotal.Location = New System.Drawing.Point(551, 37)
         Me.orangeTotal.Name = "orangeTotal"
         Me.orangeTotal.Size = New System.Drawing.Size(13, 13)
         Me.orangeTotal.TabIndex = 67
@@ -794,7 +810,7 @@ Partial Class mainForm
         'orangeToday
         '
         Me.orangeToday.AutoSize = True
-        Me.orangeToday.Location = New System.Drawing.Point(536, 66)
+        Me.orangeToday.Location = New System.Drawing.Point(551, 50)
         Me.orangeToday.Name = "orangeToday"
         Me.orangeToday.Size = New System.Drawing.Size(13, 13)
         Me.orangeToday.TabIndex = 66
@@ -803,7 +819,7 @@ Partial Class mainForm
         'Label25
         '
         Me.Label25.AutoSize = True
-        Me.Label25.Location = New System.Drawing.Point(465, 66)
+        Me.Label25.Location = New System.Drawing.Point(480, 50)
         Me.Label25.Name = "Label25"
         Me.Label25.Size = New System.Drawing.Size(72, 13)
         Me.Label25.TabIndex = 65
@@ -812,7 +828,7 @@ Partial Class mainForm
         'Label29
         '
         Me.Label29.AutoSize = True
-        Me.Label29.Location = New System.Drawing.Point(465, 53)
+        Me.Label29.Location = New System.Drawing.Point(480, 37)
         Me.Label29.Name = "Label29"
         Me.Label29.Size = New System.Drawing.Size(69, 13)
         Me.Label29.TabIndex = 64
@@ -821,7 +837,7 @@ Partial Class mainForm
         'orangeWorst
         '
         Me.orangeWorst.AutoSize = True
-        Me.orangeWorst.Location = New System.Drawing.Point(536, 93)
+        Me.orangeWorst.Location = New System.Drawing.Point(551, 77)
         Me.orangeWorst.Name = "orangeWorst"
         Me.orangeWorst.Size = New System.Drawing.Size(34, 13)
         Me.orangeWorst.TabIndex = 63
@@ -830,7 +846,7 @@ Partial Class mainForm
         'Label33
         '
         Me.Label33.AutoSize = True
-        Me.Label33.Location = New System.Drawing.Point(465, 93)
+        Me.Label33.Location = New System.Drawing.Point(480, 77)
         Me.Label33.Name = "Label33"
         Me.Label33.Size = New System.Drawing.Size(41, 13)
         Me.Label33.TabIndex = 62
@@ -839,7 +855,7 @@ Partial Class mainForm
         'orangeAo100
         '
         Me.orangeAo100.AutoSize = True
-        Me.orangeAo100.Location = New System.Drawing.Point(536, 118)
+        Me.orangeAo100.Location = New System.Drawing.Point(551, 102)
         Me.orangeAo100.Name = "orangeAo100"
         Me.orangeAo100.Size = New System.Drawing.Size(34, 13)
         Me.orangeAo100.TabIndex = 61
@@ -848,7 +864,7 @@ Partial Class mainForm
         'Label36
         '
         Me.Label36.AutoSize = True
-        Me.Label36.Location = New System.Drawing.Point(465, 118)
+        Me.Label36.Location = New System.Drawing.Point(480, 102)
         Me.Label36.Name = "Label36"
         Me.Label36.Size = New System.Drawing.Size(41, 13)
         Me.Label36.TabIndex = 60
@@ -857,7 +873,7 @@ Partial Class mainForm
         'orangeAo5
         '
         Me.orangeAo5.AutoSize = True
-        Me.orangeAo5.Location = New System.Drawing.Point(536, 105)
+        Me.orangeAo5.Location = New System.Drawing.Point(551, 89)
         Me.orangeAo5.Name = "orangeAo5"
         Me.orangeAo5.Size = New System.Drawing.Size(34, 13)
         Me.orangeAo5.TabIndex = 59
@@ -866,7 +882,7 @@ Partial Class mainForm
         'Label38
         '
         Me.Label38.AutoSize = True
-        Me.Label38.Location = New System.Drawing.Point(465, 105)
+        Me.Label38.Location = New System.Drawing.Point(480, 89)
         Me.Label38.Name = "Label38"
         Me.Label38.Size = New System.Drawing.Size(29, 13)
         Me.Label38.TabIndex = 58
@@ -875,7 +891,7 @@ Partial Class mainForm
         'orangeBest
         '
         Me.orangeBest.AutoSize = True
-        Me.orangeBest.Location = New System.Drawing.Point(536, 81)
+        Me.orangeBest.Location = New System.Drawing.Point(551, 65)
         Me.orangeBest.Name = "orangeBest"
         Me.orangeBest.Size = New System.Drawing.Size(34, 13)
         Me.orangeBest.TabIndex = 57
@@ -884,7 +900,7 @@ Partial Class mainForm
         'Label40
         '
         Me.Label40.AutoSize = True
-        Me.Label40.Location = New System.Drawing.Point(465, 81)
+        Me.Label40.Location = New System.Drawing.Point(480, 65)
         Me.Label40.Name = "Label40"
         Me.Label40.Size = New System.Drawing.Size(34, 13)
         Me.Label40.TabIndex = 56
@@ -893,7 +909,7 @@ Partial Class mainForm
         'blueTotal
         '
         Me.blueTotal.AutoSize = True
-        Me.blueTotal.Location = New System.Drawing.Point(693, 53)
+        Me.blueTotal.Location = New System.Drawing.Point(708, 37)
         Me.blueTotal.Name = "blueTotal"
         Me.blueTotal.Size = New System.Drawing.Size(13, 13)
         Me.blueTotal.TabIndex = 79
@@ -902,7 +918,7 @@ Partial Class mainForm
         'blueToday
         '
         Me.blueToday.AutoSize = True
-        Me.blueToday.Location = New System.Drawing.Point(693, 66)
+        Me.blueToday.Location = New System.Drawing.Point(708, 50)
         Me.blueToday.Name = "blueToday"
         Me.blueToday.Size = New System.Drawing.Size(13, 13)
         Me.blueToday.TabIndex = 78
@@ -911,7 +927,7 @@ Partial Class mainForm
         'Label31
         '
         Me.Label31.AutoSize = True
-        Me.Label31.Location = New System.Drawing.Point(622, 66)
+        Me.Label31.Location = New System.Drawing.Point(637, 50)
         Me.Label31.Name = "Label31"
         Me.Label31.Size = New System.Drawing.Size(72, 13)
         Me.Label31.TabIndex = 77
@@ -920,7 +936,7 @@ Partial Class mainForm
         'Label35
         '
         Me.Label35.AutoSize = True
-        Me.Label35.Location = New System.Drawing.Point(622, 53)
+        Me.Label35.Location = New System.Drawing.Point(637, 37)
         Me.Label35.Name = "Label35"
         Me.Label35.Size = New System.Drawing.Size(69, 13)
         Me.Label35.TabIndex = 76
@@ -929,7 +945,7 @@ Partial Class mainForm
         'blueWorst
         '
         Me.blueWorst.AutoSize = True
-        Me.blueWorst.Location = New System.Drawing.Point(693, 93)
+        Me.blueWorst.Location = New System.Drawing.Point(708, 77)
         Me.blueWorst.Name = "blueWorst"
         Me.blueWorst.Size = New System.Drawing.Size(34, 13)
         Me.blueWorst.TabIndex = 75
@@ -938,7 +954,7 @@ Partial Class mainForm
         'Label39
         '
         Me.Label39.AutoSize = True
-        Me.Label39.Location = New System.Drawing.Point(622, 93)
+        Me.Label39.Location = New System.Drawing.Point(637, 77)
         Me.Label39.Name = "Label39"
         Me.Label39.Size = New System.Drawing.Size(41, 13)
         Me.Label39.TabIndex = 74
@@ -947,7 +963,7 @@ Partial Class mainForm
         'blueAo100
         '
         Me.blueAo100.AutoSize = True
-        Me.blueAo100.Location = New System.Drawing.Point(693, 118)
+        Me.blueAo100.Location = New System.Drawing.Point(708, 102)
         Me.blueAo100.Name = "blueAo100"
         Me.blueAo100.Size = New System.Drawing.Size(34, 13)
         Me.blueAo100.TabIndex = 73
@@ -956,7 +972,7 @@ Partial Class mainForm
         'Label42
         '
         Me.Label42.AutoSize = True
-        Me.Label42.Location = New System.Drawing.Point(622, 118)
+        Me.Label42.Location = New System.Drawing.Point(637, 102)
         Me.Label42.Name = "Label42"
         Me.Label42.Size = New System.Drawing.Size(41, 13)
         Me.Label42.TabIndex = 72
@@ -965,7 +981,7 @@ Partial Class mainForm
         'blueAo5
         '
         Me.blueAo5.AutoSize = True
-        Me.blueAo5.Location = New System.Drawing.Point(693, 105)
+        Me.blueAo5.Location = New System.Drawing.Point(708, 89)
         Me.blueAo5.Name = "blueAo5"
         Me.blueAo5.Size = New System.Drawing.Size(34, 13)
         Me.blueAo5.TabIndex = 71
@@ -974,7 +990,7 @@ Partial Class mainForm
         'Label44
         '
         Me.Label44.AutoSize = True
-        Me.Label44.Location = New System.Drawing.Point(622, 105)
+        Me.Label44.Location = New System.Drawing.Point(637, 89)
         Me.Label44.Name = "Label44"
         Me.Label44.Size = New System.Drawing.Size(29, 13)
         Me.Label44.TabIndex = 70
@@ -983,7 +999,7 @@ Partial Class mainForm
         'blueBest
         '
         Me.blueBest.AutoSize = True
-        Me.blueBest.Location = New System.Drawing.Point(693, 81)
+        Me.blueBest.Location = New System.Drawing.Point(708, 65)
         Me.blueBest.Name = "blueBest"
         Me.blueBest.Size = New System.Drawing.Size(34, 13)
         Me.blueBest.TabIndex = 69
@@ -992,7 +1008,7 @@ Partial Class mainForm
         'Label46
         '
         Me.Label46.AutoSize = True
-        Me.Label46.Location = New System.Drawing.Point(622, 81)
+        Me.Label46.Location = New System.Drawing.Point(637, 65)
         Me.Label46.Name = "Label46"
         Me.Label46.Size = New System.Drawing.Size(34, 13)
         Me.Label46.TabIndex = 68
@@ -1002,7 +1018,7 @@ Partial Class mainForm
         '
         Me.TabControl1.Controls.Add(Me.allsolvesPlotPG)
         Me.TabControl1.Controls.Add(Me.recentsolvesDataPG)
-        Me.TabControl1.Location = New System.Drawing.Point(270, 253)
+        Me.TabControl1.Location = New System.Drawing.Point(334, 254)
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.SelectedIndex = 0
         Me.TabControl1.Size = New System.Drawing.Size(457, 264)
@@ -1060,7 +1076,7 @@ Partial Class mainForm
         '
         Me.scrambleLabel.AutoSize = True
         Me.scrambleLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.scrambleLabel.Location = New System.Drawing.Point(9, 34)
+        Me.scrambleLabel.Location = New System.Drawing.Point(24, 18)
         Me.scrambleLabel.Name = "scrambleLabel"
         Me.scrambleLabel.Size = New System.Drawing.Size(51, 13)
         Me.scrambleLabel.TabIndex = 81
@@ -1073,102 +1089,210 @@ Partial Class mainForm
         Me.scrambleButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Yellow
         Me.scrambleButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Yellow
         Me.scrambleButton.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.scrambleButton.Location = New System.Drawing.Point(55, 228)
+        Me.scrambleButton.Location = New System.Drawing.Point(70, 212)
         Me.scrambleButton.Name = "scrambleButton"
         Me.scrambleButton.Size = New System.Drawing.Size(81, 29)
         Me.scrambleButton.TabIndex = 82
         Me.scrambleButton.Text = "Scramble"
         Me.scrambleButton.UseVisualStyleBackColor = False
         '
+        'TabControl2
+        '
+        Me.TabControl2.Controls.Add(Me.SpeedSolvePage)
+        Me.TabControl2.Controls.Add(Me.PLLPage)
+        Me.TabControl2.Location = New System.Drawing.Point(12, 12)
+        Me.TabControl2.Name = "TabControl2"
+        Me.TabControl2.SelectedIndex = 0
+        Me.TabControl2.Size = New System.Drawing.Size(812, 562)
+        Me.TabControl2.TabIndex = 83
+        '
+        'SpeedSolvePage
+        '
+        Me.SpeedSolvePage.Controls.Add(Me.scrambleLabel)
+        Me.SpeedSolvePage.Controls.Add(Me.scrambleButton)
+        Me.SpeedSolvePage.Controls.Add(Me.timerLabel)
+        Me.SpeedSolvePage.Controls.Add(Me.timerButton)
+        Me.SpeedSolvePage.Controls.Add(Me.GroupBox1)
+        Me.SpeedSolvePage.Controls.Add(Me.TabControl1)
+        Me.SpeedSolvePage.Controls.Add(Me.Label12)
+        Me.SpeedSolvePage.Controls.Add(Me.blueTotal)
+        Me.SpeedSolvePage.Controls.Add(Me.whiteCB)
+        Me.SpeedSolvePage.Controls.Add(Me.blueToday)
+        Me.SpeedSolvePage.Controls.Add(Me.whiteBest)
+        Me.SpeedSolvePage.Controls.Add(Me.Label31)
+        Me.SpeedSolvePage.Controls.Add(Me.greenCB)
+        Me.SpeedSolvePage.Controls.Add(Me.Label35)
+        Me.SpeedSolvePage.Controls.Add(Me.Label10)
+        Me.SpeedSolvePage.Controls.Add(Me.blueWorst)
+        Me.SpeedSolvePage.Controls.Add(Me.yellowCB)
+        Me.SpeedSolvePage.Controls.Add(Me.Label39)
+        Me.SpeedSolvePage.Controls.Add(Me.whiteAo5)
+        Me.SpeedSolvePage.Controls.Add(Me.blueAo100)
+        Me.SpeedSolvePage.Controls.Add(Me.orangeCB)
+        Me.SpeedSolvePage.Controls.Add(Me.Label42)
+        Me.SpeedSolvePage.Controls.Add(Me.Label8)
+        Me.SpeedSolvePage.Controls.Add(Me.blueAo5)
+        Me.SpeedSolvePage.Controls.Add(Me.blueCB)
+        Me.SpeedSolvePage.Controls.Add(Me.Label44)
+        Me.SpeedSolvePage.Controls.Add(Me.whiteAo100)
+        Me.SpeedSolvePage.Controls.Add(Me.blueBest)
+        Me.SpeedSolvePage.Controls.Add(Me.redCB)
+        Me.SpeedSolvePage.Controls.Add(Me.Label46)
+        Me.SpeedSolvePage.Controls.Add(Me.Label6)
+        Me.SpeedSolvePage.Controls.Add(Me.orangeTotal)
+        Me.SpeedSolvePage.Controls.Add(Me.whiteWorst)
+        Me.SpeedSolvePage.Controls.Add(Me.orangeToday)
+        Me.SpeedSolvePage.Controls.Add(Me.Label3)
+        Me.SpeedSolvePage.Controls.Add(Me.Label25)
+        Me.SpeedSolvePage.Controls.Add(Me.Label7)
+        Me.SpeedSolvePage.Controls.Add(Me.Label29)
+        Me.SpeedSolvePage.Controls.Add(Me.whiteToday)
+        Me.SpeedSolvePage.Controls.Add(Me.orangeWorst)
+        Me.SpeedSolvePage.Controls.Add(Me.whiteTotal)
+        Me.SpeedSolvePage.Controls.Add(Me.Label33)
+        Me.SpeedSolvePage.Controls.Add(Me.Label22)
+        Me.SpeedSolvePage.Controls.Add(Me.orangeAo100)
+        Me.SpeedSolvePage.Controls.Add(Me.yellowBest)
+        Me.SpeedSolvePage.Controls.Add(Me.Label36)
+        Me.SpeedSolvePage.Controls.Add(Me.Label20)
+        Me.SpeedSolvePage.Controls.Add(Me.orangeAo5)
+        Me.SpeedSolvePage.Controls.Add(Me.yellowAo5)
+        Me.SpeedSolvePage.Controls.Add(Me.Label38)
+        Me.SpeedSolvePage.Controls.Add(Me.Label18)
+        Me.SpeedSolvePage.Controls.Add(Me.orangeBest)
+        Me.SpeedSolvePage.Controls.Add(Me.yellowAo100)
+        Me.SpeedSolvePage.Controls.Add(Me.Label40)
+        Me.SpeedSolvePage.Controls.Add(Me.Label16)
+        Me.SpeedSolvePage.Controls.Add(Me.greenTotal)
+        Me.SpeedSolvePage.Controls.Add(Me.yellowWorst)
+        Me.SpeedSolvePage.Controls.Add(Me.greenToday)
+        Me.SpeedSolvePage.Controls.Add(Me.Label14)
+        Me.SpeedSolvePage.Controls.Add(Me.Label19)
+        Me.SpeedSolvePage.Controls.Add(Me.Label13)
+        Me.SpeedSolvePage.Controls.Add(Me.Label23)
+        Me.SpeedSolvePage.Controls.Add(Me.yellowToday)
+        Me.SpeedSolvePage.Controls.Add(Me.greenWorst)
+        Me.SpeedSolvePage.Controls.Add(Me.yellowTotal)
+        Me.SpeedSolvePage.Controls.Add(Me.Label27)
+        Me.SpeedSolvePage.Controls.Add(Me.Label28)
+        Me.SpeedSolvePage.Controls.Add(Me.greenAo100)
+        Me.SpeedSolvePage.Controls.Add(Me.redBest)
+        Me.SpeedSolvePage.Controls.Add(Me.Label30)
+        Me.SpeedSolvePage.Controls.Add(Me.Label26)
+        Me.SpeedSolvePage.Controls.Add(Me.greenAo5)
+        Me.SpeedSolvePage.Controls.Add(Me.redAo5)
+        Me.SpeedSolvePage.Controls.Add(Me.Label32)
+        Me.SpeedSolvePage.Controls.Add(Me.Label24)
+        Me.SpeedSolvePage.Controls.Add(Me.greenBest)
+        Me.SpeedSolvePage.Controls.Add(Me.redAo100)
+        Me.SpeedSolvePage.Controls.Add(Me.Label34)
+        Me.SpeedSolvePage.Controls.Add(Me.Label21)
+        Me.SpeedSolvePage.Controls.Add(Me.redTotal)
+        Me.SpeedSolvePage.Controls.Add(Me.redWorst)
+        Me.SpeedSolvePage.Controls.Add(Me.redToday)
+        Me.SpeedSolvePage.Controls.Add(Me.Label17)
+        Me.SpeedSolvePage.Controls.Add(Me.Label15)
+        Me.SpeedSolvePage.Location = New System.Drawing.Point(4, 22)
+        Me.SpeedSolvePage.Name = "SpeedSolvePage"
+        Me.SpeedSolvePage.Padding = New System.Windows.Forms.Padding(3)
+        Me.SpeedSolvePage.Size = New System.Drawing.Size(804, 536)
+        Me.SpeedSolvePage.TabIndex = 0
+        Me.SpeedSolvePage.Text = "Speed Solve"
+        Me.SpeedSolvePage.UseVisualStyleBackColor = True
+        '
+        'PLLPage
+        '
+        Me.PLLPage.Controls.Add(Me.PLLAlg)
+        Me.PLLPage.Controls.Add(Me.PLLPicture)
+        Me.PLLPage.Controls.Add(Me.Label9)
+        Me.PLLPage.Controls.Add(Me.PLLList)
+        Me.PLLPage.Location = New System.Drawing.Point(4, 22)
+        Me.PLLPage.Name = "PLLPage"
+        Me.PLLPage.Padding = New System.Windows.Forms.Padding(3)
+        Me.PLLPage.Size = New System.Drawing.Size(804, 536)
+        Me.PLLPage.TabIndex = 1
+        Me.PLLPage.Text = "PLL Practice"
+        Me.PLLPage.UseVisualStyleBackColor = True
+        '
+        'PLLAlg
+        '
+        Me.PLLAlg.AutoSize = True
+        Me.PLLAlg.Location = New System.Drawing.Point(244, 154)
+        Me.PLLAlg.Name = "PLLAlg"
+        Me.PLLAlg.Size = New System.Drawing.Size(41, 13)
+        Me.PLLAlg.TabIndex = 3
+        Me.PLLAlg.Text = "PLLAlg"
+        '
+        'PLLPicture
+        '
+        Me.PLLPicture.Location = New System.Drawing.Point(247, 37)
+        Me.PLLPicture.Name = "PLLPicture"
+        Me.PLLPicture.Size = New System.Drawing.Size(136, 97)
+        Me.PLLPicture.TabIndex = 2
+        Me.PLLPicture.TabStop = False
+        '
+        'Label9
+        '
+        Me.Label9.AutoSize = True
+        Me.Label9.Location = New System.Drawing.Point(20, 24)
+        Me.Label9.Name = "Label9"
+        Me.Label9.Size = New System.Drawing.Size(34, 13)
+        Me.Label9.TabIndex = 1
+        Me.Label9.Text = "PLLs:"
+        '
+        'PLLList
+        '
+        Me.PLLList.FormattingEnabled = True
+        Me.PLLList.Items.AddRange(New Object() {"All", "A (a)", "A (b)", "E", "F", "G (a)", "G (b)", "G (c)", "G (d)", "H", "J (a)", "J (b)", "N (a)", "N (b)", "R (a)", "R (b)", "T", "U (a)", "U (b)", "V", "Y", "Z"})
+        Me.PLLList.Location = New System.Drawing.Point(23, 40)
+        Me.PLLList.Name = "PLLList"
+        Me.PLLList.Size = New System.Drawing.Size(80, 334)
+        Me.PLLList.TabIndex = 0
+        '
+        'PLLImageList
+        '
+        Me.PLLImageList.ImageStream = CType(resources.GetObject("PLLImageList.ImageStream"), System.Windows.Forms.ImageListStreamer)
+        Me.PLLImageList.TransparentColor = System.Drawing.Color.Transparent
+        Me.PLLImageList.Images.SetKeyName(0, "Aa.gif")
+        Me.PLLImageList.Images.SetKeyName(1, "Ab.gif")
+        Me.PLLImageList.Images.SetKeyName(2, "E.gif")
+        Me.PLLImageList.Images.SetKeyName(3, "F.gif")
+        Me.PLLImageList.Images.SetKeyName(4, "Ga.gif")
+        Me.PLLImageList.Images.SetKeyName(5, "Gb.gif")
+        Me.PLLImageList.Images.SetKeyName(6, "Gc.gif")
+        Me.PLLImageList.Images.SetKeyName(7, "Gd.gif")
+        Me.PLLImageList.Images.SetKeyName(8, "H.gif")
+        Me.PLLImageList.Images.SetKeyName(9, "Ja.gif")
+        Me.PLLImageList.Images.SetKeyName(10, "Jb.gif")
+        Me.PLLImageList.Images.SetKeyName(11, "Na.gif")
+        Me.PLLImageList.Images.SetKeyName(12, "Nb.gif")
+        Me.PLLImageList.Images.SetKeyName(13, "Ra.gif")
+        Me.PLLImageList.Images.SetKeyName(14, "Rb.gif")
+        Me.PLLImageList.Images.SetKeyName(15, "T.gif")
+        Me.PLLImageList.Images.SetKeyName(16, "Ua.gif")
+        Me.PLLImageList.Images.SetKeyName(17, "Ub.gif")
+        Me.PLLImageList.Images.SetKeyName(18, "V.gif")
+        Me.PLLImageList.Images.SetKeyName(19, "Y.gif")
+        Me.PLLImageList.Images.SetKeyName(20, "Z.gif")
+        '
+        'UpdateAlgStrip
+        '
+        Me.UpdateAlgStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AddAlgorithmToolStripMenuItem})
+        Me.UpdateAlgStrip.Name = "UpdateAlgStrip"
+        Me.UpdateAlgStrip.Size = New System.Drawing.Size(154, 26)
+        '
+        'AddAlgorithmToolStripMenuItem
+        '
+        Me.AddAlgorithmToolStripMenuItem.Name = "AddAlgorithmToolStripMenuItem"
+        Me.AddAlgorithmToolStripMenuItem.Size = New System.Drawing.Size(153, 22)
+        Me.AddAlgorithmToolStripMenuItem.Text = "Add Algorithm"
+        '
         'mainForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(813, 534)
-        Me.Controls.Add(Me.scrambleButton)
-        Me.Controls.Add(Me.scrambleLabel)
-        Me.Controls.Add(Me.TabControl1)
-        Me.Controls.Add(Me.blueTotal)
-        Me.Controls.Add(Me.blueToday)
-        Me.Controls.Add(Me.Label31)
-        Me.Controls.Add(Me.Label35)
-        Me.Controls.Add(Me.blueWorst)
-        Me.Controls.Add(Me.Label39)
-        Me.Controls.Add(Me.blueAo100)
-        Me.Controls.Add(Me.Label42)
-        Me.Controls.Add(Me.blueAo5)
-        Me.Controls.Add(Me.Label44)
-        Me.Controls.Add(Me.blueBest)
-        Me.Controls.Add(Me.Label46)
-        Me.Controls.Add(Me.orangeTotal)
-        Me.Controls.Add(Me.orangeToday)
-        Me.Controls.Add(Me.Label25)
-        Me.Controls.Add(Me.Label29)
-        Me.Controls.Add(Me.orangeWorst)
-        Me.Controls.Add(Me.Label33)
-        Me.Controls.Add(Me.orangeAo100)
-        Me.Controls.Add(Me.Label36)
-        Me.Controls.Add(Me.orangeAo5)
-        Me.Controls.Add(Me.Label38)
-        Me.Controls.Add(Me.orangeBest)
-        Me.Controls.Add(Me.Label40)
-        Me.Controls.Add(Me.greenTotal)
-        Me.Controls.Add(Me.greenToday)
-        Me.Controls.Add(Me.Label19)
-        Me.Controls.Add(Me.Label23)
-        Me.Controls.Add(Me.greenWorst)
-        Me.Controls.Add(Me.Label27)
-        Me.Controls.Add(Me.greenAo100)
-        Me.Controls.Add(Me.Label30)
-        Me.Controls.Add(Me.greenAo5)
-        Me.Controls.Add(Me.Label32)
-        Me.Controls.Add(Me.greenBest)
-        Me.Controls.Add(Me.Label34)
-        Me.Controls.Add(Me.redTotal)
-        Me.Controls.Add(Me.redToday)
-        Me.Controls.Add(Me.Label15)
-        Me.Controls.Add(Me.Label17)
-        Me.Controls.Add(Me.redWorst)
-        Me.Controls.Add(Me.Label21)
-        Me.Controls.Add(Me.redAo100)
-        Me.Controls.Add(Me.Label24)
-        Me.Controls.Add(Me.redAo5)
-        Me.Controls.Add(Me.Label26)
-        Me.Controls.Add(Me.redBest)
-        Me.Controls.Add(Me.Label28)
-        Me.Controls.Add(Me.yellowTotal)
-        Me.Controls.Add(Me.yellowToday)
-        Me.Controls.Add(Me.Label13)
-        Me.Controls.Add(Me.Label14)
-        Me.Controls.Add(Me.yellowWorst)
-        Me.Controls.Add(Me.Label16)
-        Me.Controls.Add(Me.yellowAo100)
-        Me.Controls.Add(Me.Label18)
-        Me.Controls.Add(Me.yellowAo5)
-        Me.Controls.Add(Me.Label20)
-        Me.Controls.Add(Me.yellowBest)
-        Me.Controls.Add(Me.Label22)
-        Me.Controls.Add(Me.whiteTotal)
-        Me.Controls.Add(Me.whiteToday)
-        Me.Controls.Add(Me.Label7)
-        Me.Controls.Add(Me.Label3)
-        Me.Controls.Add(Me.whiteWorst)
-        Me.Controls.Add(Me.Label6)
-        Me.Controls.Add(Me.redCB)
-        Me.Controls.Add(Me.whiteAo100)
-        Me.Controls.Add(Me.blueCB)
-        Me.Controls.Add(Me.Label8)
-        Me.Controls.Add(Me.orangeCB)
-        Me.Controls.Add(Me.whiteAo5)
-        Me.Controls.Add(Me.yellowCB)
-        Me.Controls.Add(Me.Label10)
-        Me.Controls.Add(Me.greenCB)
-        Me.Controls.Add(Me.whiteBest)
-        Me.Controls.Add(Me.whiteCB)
-        Me.Controls.Add(Me.Label12)
-        Me.Controls.Add(Me.GroupBox1)
-        Me.Controls.Add(Me.timerButton)
-        Me.Controls.Add(Me.timerLabel)
+        Me.ClientSize = New System.Drawing.Size(827, 578)
+        Me.Controls.Add(Me.TabControl2)
         Me.Name = "mainForm"
         Me.Text = "SpeedTimer"
         CType(Me.totalAvgChart, System.ComponentModel.ISupportInitialize).EndInit()
@@ -1179,8 +1303,14 @@ Partial Class mainForm
         Me.recentsolvesDataPG.ResumeLayout(False)
         CType(Me.recentSolvesDataGrid, System.ComponentModel.ISupportInitialize).EndInit()
         Me.recentSolves_Strip.ResumeLayout(False)
+        Me.TabControl2.ResumeLayout(False)
+        Me.SpeedSolvePage.ResumeLayout(False)
+        Me.SpeedSolvePage.PerformLayout()
+        Me.PLLPage.ResumeLayout(False)
+        Me.PLLPage.PerformLayout()
+        CType(Me.PLLPicture, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.UpdateAlgStrip.ResumeLayout(False)
         Me.ResumeLayout(False)
-        Me.PerformLayout()
 
     End Sub
 
@@ -1285,4 +1415,14 @@ Partial Class mainForm
     Friend WithEvents DeleteSolveToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents scrambleLabel As Label
     Friend WithEvents scrambleButton As Button
+    Friend WithEvents TabControl2 As TabControl
+    Friend WithEvents SpeedSolvePage As TabPage
+    Friend WithEvents PLLPage As TabPage
+    Friend WithEvents PLLList As CheckedListBox
+    Friend WithEvents Label9 As Label
+    Friend WithEvents PLLImageList As ImageList
+    Friend WithEvents PLLPicture As PictureBox
+    Friend WithEvents UpdateAlgStrip As ContextMenuStrip
+    Friend WithEvents AddAlgorithmToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents PLLAlg As Label
 End Class

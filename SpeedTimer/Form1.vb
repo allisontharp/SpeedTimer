@@ -66,6 +66,7 @@ Public Class mainForm
 
     End Sub
 
+
     Private Sub timerButton_KeyUp(sender As Object, e As KeyEventArgs) Handles timerButton.KeyUp
         ' Start/Stop button 
         ' If timerOn variable = 0, timer is not on, start timer.
@@ -227,6 +228,8 @@ Public Class mainForm
     End Sub
 
     Private Sub recentSolvesDataGrid_CellMouseDown(sender As Object, e As DataGridViewCellMouseEventArgs) Handles recentSolvesDataGrid.CellMouseDown
+
+
         If (e.Button = MouseButtons.Right) Then
             recentSolves_Strip.Show(MousePosition.X, MousePosition.Y)
         End If
@@ -302,5 +305,32 @@ Public Class mainForm
     Private Sub scrambleButton_Click(sender As Object, e As EventArgs) Handles scrambleButton.Click
         funcs.scramble()
 
+    End Sub
+
+    Private Sub OLLList_SelectedIndexChanged(sender As Object, e As EventArgs) Handles PLLList.SelectedIndexChanged
+        Dim index As Integer = PLLList.SelectedIndex
+        PLLPicture.Image = PLLImageList.Images(index - 1)
+
+        Dim query As String = "SELECT alg FROM algs WHERE alg_name_id = (SELECT id FROM alg_name WHERE name like """
+        query = query & PLLList.SelectedItem & """)"
+
+        Dim alg As String = funcs.mysqlquery(query)
+
+        PLLAlg.Text = alg
+
+    End Sub
+
+    Private Sub PLLList_MouseDown(sender As Object, e As MouseEventArgs) Handles PLLList.MouseDown
+        If (e.Button = MouseButtons.Right) Then
+            UpdateAlgStrip.Show(MousePosition.X, MousePosition.Y)
+        End If
+    End Sub
+
+    Private Sub AddAlgorithmToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AddAlgorithmToolStripMenuItem.Click
+        Dim obj As New AddAlg
+        Dim name As String = PLLList.SelectedItem
+
+        obj.AlgNameLabel.Text = name
+        obj.Show()
     End Sub
 End Class

@@ -18,42 +18,6 @@ Public Class UpdateSolve
         End Try
     End Sub
 
-    Private Function mysqlquery(stmt As String)
-        Try
-            conn.Close()
-        Catch ex As Exception
-
-        End Try
-
-        Try
-            conn = New MySqlConnection(constr)
-            conn.Open()
-
-
-            Dim cmd As MySqlCommand = New MySqlCommand(stmt, conn)
-            Dim reader As MySqlDataReader = cmd.ExecuteReader
-
-            While reader.Read
-                ' If IsDBNull(reader) Then
-
-                If reader.IsDBNull(0) Then
-                    Return ("NULL")
-                Else
-                    Return reader.GetString(0)
-                End If
-            End While
-
-
-        Catch ex As MySqlException
-            ' TextBox1.Text = ex.ToString()
-            Console.WriteLine("Error: " & ex.ToString())
-            MsgBox(ex.ToString())
-            Return ex.ToString()
-        Finally
-            ' conn.Close()
-        End Try
-    End Function
-
 
     Private Sub updateSolveButton_Click(sender As Object, e As EventArgs) Handles updateSolveButton.Click
         '        Dim query As String = "
