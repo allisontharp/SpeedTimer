@@ -2,10 +2,17 @@
 
 
 Public Class mainForm
+    ' TODO: handle > 60 seconds
+    ' TODO: add plots average by day by color, all on one plot
+    ' TODO: add functionality to practice just cross or F2L
+    ' TODO: add functionality to test and practice PLL
+    ' TODO: add functionality to add custom PLL algs
+
     Dim conn As New MySqlConnection
     Dim cmd As New MySqlCommand
     Dim da As New MySqlDataAdapter
     Dim constr As String = "database=cube; data source = localhost; user id = root; password = zsxdcf;"
+    Dim funcs As New CommonFunctions
 
 
     Private stopwatch As New Stopwatch
@@ -18,39 +25,6 @@ Public Class mainForm
 
     Dim time As Decimal
 
-    Private Function mysqlquery(stmt As String)
-        Try
-            ' conn.Close()
-        Catch ex As Exception
-
-        End Try
-
-        Try
-            conn = New MySqlConnection(constr)
-            conn.Open()
-
-
-            Dim cmd As MySqlCommand = New MySqlCommand(stmt, conn)
-            Dim reader As MySqlDataReader = cmd.ExecuteReader
-
-            While reader.Read
-                If IsDBNull(reader) Then
-                    Return ("empty")
-                Else
-                    Return reader.GetString(0)
-                End If
-            End While
-
-
-        Catch ex As MySqlException
-            ' TextBox1.Text = ex.ToString()
-            Console.WriteLine("Error: " & ex.ToString())
-            Return ex.ToString()
-        Finally
-            ' conn.Close()
-        End Try
-    End Function
-
     Private Sub mainForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Try
             conn.ConnectionString = constr
@@ -59,16 +33,13 @@ Public Class mainForm
             MsgBox(ex.Message)
         End Try
 
+        funcs.updateTimes()
 
-        bestLabel.Text = mysqlquery("SELECT min(solvetime) from times")
-        ao5Label.Text = mysqlquery("SELECT TRUNCATE(avg(x.solvetime),3) FROM (SELECT solvetime FROM times ORDER BY id DESC LIMIT 5)X")
-        ao100Label.Text = mysqlquery("SELECT TRUNCATE(avg(x.solvetime),3) FROM (SELECT solvetime FROM times ORDER BY id DESC LIMIT 100)X")
-        worstLabel.Text = mysqlquery("SELECT max(solvetime) FROM times")
+        'Dim results As String = funcs.scramble()
+        'scrambleLabel.Text = results
+        funcs.scramble()
 
     End Sub
-
-
-
 
     Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
         Dim elapsed As TimeSpan = Me.stopwatch.Elapsed
@@ -102,8 +73,27 @@ Public Class mainForm
         Dim pretimerelapsed As TimeSpan = Me.prestopwatch.Elapsed
         Dim outFile As IO.StreamWriter = My.Computer.FileSystem.OpenTextFileWriter(csvFile, True)
 
-        Dim submitQuery As String = "INSERT INTO times (solvetime) VALUES (@time)"
+        Dim submitQuery As String = "INSERT INTO times (solvetime, startcolor, scramble) VALUES (@time, @startcolor, @scramble)"
         Dim cmd = New MySqlCommand(submitQuery, conn)
+
+        Dim startColor As String = ""
+
+        If whiteCB.Checked Then
+            startColor = "1"
+        ElseIf yellowCB.Checked Then
+            startColor = "2"
+        ElseIf greenCB.Checked Then
+            startColor = "3"
+        ElseIf blueCB.Checked Then
+            startColor = "4"
+        ElseIf redCB.Checked Then
+            startColor = "5"
+        ElseIf orangeCB.Checked Then
+            startColor = "6"
+        Else
+            startColor = ""
+        End If
+
 
         conn = New MySqlConnection(constr)
         conn.Open()
@@ -134,15 +124,16 @@ Public Class mainForm
 
 
 
-
             ' Plot Each Time
             totalAvgChart.Series(0).Points.Add(Val(timerLabel.Text))
             ' totalAvgChart.Series(1).Points.Add(Val(timerLabel.Text) / 2)
 
             ' Write to Database
             cmd.Parameters.AddWithValue("@time", Val(timerLabel.Text))
-            Try
+            cmd.Parameters.AddWithValue("@startcolor", startColor)
+            cmd.Parameters.AddWithValue("@scramble", "" & scrambleLabel.Text & "")
 
+            Try
                 cmd.ExecuteNonQuery()
             Catch ex As MySqlException
                 MsgBox(ex.ToString())
@@ -155,11 +146,8 @@ Public Class mainForm
             outFile.Write(Environment.NewLine)
 
             ' Update Stats!
-            bestLabel.Text = mysqlquery("SELECT min(solvetime) from times")
-            ao5Label.Text = mysqlquery("SELECT TRUNCATE(avg(x.solvetime),3) FROM (SELECT solvetime FROM times ORDER BY id DESC LIMIT 5)X")
-            ao100Label.Text = mysqlquery("SELECT TRUNCATE(avg(x.solvetime),3) FROM (SELECT solvetime FROM times ORDER BY id DESC LIMIT 100)X")
-            worstLabel.Text = mysqlquery("SELECT max(solvetime) FROM times")
-
+            funcs.updateTimes()
+            funcs.scramble()
 
             ' Reset timer
             timerButton.Text = "Ready!"
@@ -177,4 +165,142 @@ Public Class mainForm
     End Sub
 
 
+
+    Private Sub whiteCB_CheckedChanged(sender As Object, e As EventArgs) Handles whiteCB.CheckedChanged
+        If whiteCB.Checked Then
+            redCB.Checked = False
+            blueCB.Checked = False
+            greenCB.Checked = False
+            orangeCB.Checked = False
+            yellowCB.Checked = False
+        End If
+    End Sub
+
+    Private Sub orangeCB_CheckedChanged(sender As Object, e As EventArgs) Handles orangeCB.CheckedChanged
+        If orangeCB.Checked Then
+            redCB.Checked = False
+            blueCB.Checked = False
+            yellowCB.Checked = False
+            greenCB.Checked = False
+            whiteCB.Checked = False
+        End If
+    End Sub
+
+    Private Sub greenCB_CheckedChanged(sender As Object, e As EventArgs) Handles greenCB.CheckedChanged
+        If greenCB.Checked Then
+            redCB.Checked = False
+            yellowCB.Checked = False
+            blueCB.Checked = False
+            orangeCB.Checked = False
+            whiteCB.Checked = False
+        End If
+    End Sub
+
+    Private Sub blueCB_CheckedChanged(sender As Object, e As EventArgs) Handles blueCB.CheckedChanged
+        If blueCB.Checked Then
+            redCB.Checked = False
+            yellowCB.Checked = False
+            greenCB.Checked = False
+            orangeCB.Checked = False
+            whiteCB.Checked = False
+        End If
+    End Sub
+
+    Private Sub yellowCB_CheckedChanged(sender As Object, e As EventArgs) Handles yellowCB.CheckedChanged
+        If yellowCB.Checked Then
+            redCB.Checked = False
+            blueCB.Checked = False
+            greenCB.Checked = False
+            orangeCB.Checked = False
+            whiteCB.Checked = False
+        End If
+    End Sub
+
+    Private Sub redCB_CheckedChanged(sender As Object, e As EventArgs) Handles redCB.CheckedChanged
+        If redCB.Checked Then
+            yellowCB.Checked = False
+            blueCB.Checked = False
+            greenCB.Checked = False
+            orangeCB.Checked = False
+            whiteCB.Checked = False
+        End If
+    End Sub
+
+    Private Sub recentSolvesDataGrid_CellMouseDown(sender As Object, e As DataGridViewCellMouseEventArgs) Handles recentSolvesDataGrid.CellMouseDown
+        If (e.Button = MouseButtons.Right) Then
+            recentSolves_Strip.Show(MousePosition.X, MousePosition.Y)
+        End If
+
+
+
+
+    End Sub
+
+    Private Sub DeleteSolveToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DeleteSolveToolStripMenuItem.Click
+        Dim i As Integer
+        conn.Close()
+        Try
+            conn.ConnectionString = constr
+            conn.Open()
+        Catch ex As MySqlException
+            MsgBox(ex.Message)
+        End Try
+
+        Try
+            i = recentSolvesDataGrid.CurrentRow.Index
+        Catch ex As Exception
+            MsgBox(ex.ToString())
+        End Try
+
+        Dim solveid As String = recentSolvesDataGrid.Item(0, i).Value
+
+
+        Dim query As String = "DELETE FROM times WHERE id = @id"
+
+        Dim cmd = New MySqlCommand(query, conn)
+
+
+        cmd.Parameters.AddWithValue("@id", solveid)
+
+        Try
+            cmd.ExecuteNonQuery()
+            conn.Close()
+            funcs.updateTimes()
+        Catch ex As MySqlException
+            MsgBox(ex.ToString())
+        Finally
+
+        End Try
+
+    End Sub
+
+
+
+    Private Sub UpdateStartColorToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles UpdateStartColorToolStripMenuItem.Click
+        Dim obj As New UpdateSolve
+
+        Dim i As Integer
+
+        Try
+            i = recentSolvesDataGrid.CurrentRow.Index
+        Catch ex As Exception
+            MsgBox(ex.ToString())
+        End Try
+
+        Dim solveid As String = recentSolvesDataGrid.Item(0, i).Value
+        Dim solvedate As String = recentSolvesDataGrid.Item(1, i).Value
+        Dim solvetime As String = recentSolvesDataGrid.Item(2, i).Value
+        Dim color As String = recentSolvesDataGrid.Item(3, i).Value
+
+        obj.solveid.Text = solveid
+
+        obj.Show()
+
+
+    End Sub
+
+    Private Sub scrambleButton_Click(sender As Object, e As EventArgs) Handles scrambleButton.Click
+        funcs.scramble()
+
+    End Sub
 End Class
