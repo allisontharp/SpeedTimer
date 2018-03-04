@@ -33,11 +33,15 @@ Public Class mainForm
             MsgBox(ex.Message)
         End Try
 
+
+
         funcs.updateTimes()
 
         'Dim results As String = funcs.scramble()
         'scrambleLabel.Text = results
         funcs.scramble()
+
+        'totalAvgChart.Series(0).Points.Add(Val(timerLabel.Text))
 
     End Sub
 
@@ -427,6 +431,10 @@ Public Class mainForm
     End Sub
 
     Private Sub PLLTimerButton_Click(sender As Object, e As EventArgs) Handles PLLTimerButton.Click
+
+    End Sub
+
+    Private Sub totalAvgChart_Click(sender As Object, e As EventArgs) Handles totalAvgChart.Click
 
     End Sub
 End Class

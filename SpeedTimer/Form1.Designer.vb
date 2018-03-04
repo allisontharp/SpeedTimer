@@ -23,14 +23,14 @@ Partial Class mainForm
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim ChartArea1 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
-        Dim Legend1 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
-        Dim Series1 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
-        Dim Series2 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
-        Dim ChartArea2 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
-        Dim Legend2 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
-        Dim Series3 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
-        Dim Series4 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
+        Dim ChartArea5 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
+        Dim Legend5 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
+        Dim Series9 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
+        Dim Series10 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
+        Dim ChartArea6 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
+        Dim Legend6 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
+        Dim Series11 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
+        Dim Series12 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(mainForm))
         Me.timerLabel = New System.Windows.Forms.Label()
         Me.timerButton = New System.Windows.Forms.Button()
@@ -201,21 +201,21 @@ Partial Class mainForm
         '
         'totalAvgChart
         '
-        ChartArea1.Name = "ChartArea1"
-        Me.totalAvgChart.ChartAreas.Add(ChartArea1)
-        Legend1.Name = "Legend1"
-        Me.totalAvgChart.Legends.Add(Legend1)
+        ChartArea5.Name = "ChartArea1"
+        Me.totalAvgChart.ChartAreas.Add(ChartArea5)
+        Legend5.Name = "Legend1"
+        Me.totalAvgChart.Legends.Add(Legend5)
         Me.totalAvgChart.Location = New System.Drawing.Point(6, 17)
         Me.totalAvgChart.Name = "totalAvgChart"
-        Series1.ChartArea = "ChartArea1"
-        Series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline
-        Series1.Legend = "Legend1"
-        Series1.Name = "AllTimes"
-        Series2.ChartArea = "ChartArea1"
-        Series2.Legend = "Legend1"
-        Series2.Name = "HalfTimes"
-        Me.totalAvgChart.Series.Add(Series1)
-        Me.totalAvgChart.Series.Add(Series2)
+        Series9.ChartArea = "ChartArea1"
+        Series9.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline
+        Series9.Legend = "Legend1"
+        Series9.Name = "AllTimes"
+        Series10.ChartArea = "ChartArea1"
+        Series10.Legend = "Legend1"
+        Series10.Name = "HalfTimes"
+        Me.totalAvgChart.Series.Add(Series9)
+        Me.totalAvgChart.Series.Add(Series10)
         Me.totalAvgChart.Size = New System.Drawing.Size(436, 195)
         Me.totalAvgChart.TabIndex = 2
         Me.totalAvgChart.Text = "Chart1"
@@ -1039,7 +1039,7 @@ Partial Class mainForm
         Me.TabControl1.Location = New System.Drawing.Point(334, 254)
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.SelectedIndex = 0
-        Me.TabControl1.Size = New System.Drawing.Size(457, 264)
+        Me.TabControl1.Size = New System.Drawing.Size(497, 264)
         Me.TabControl1.TabIndex = 80
         '
         'allsolvesPlotPG
@@ -1048,7 +1048,7 @@ Partial Class mainForm
         Me.allsolvesPlotPG.Location = New System.Drawing.Point(4, 22)
         Me.allsolvesPlotPG.Name = "allsolvesPlotPG"
         Me.allsolvesPlotPG.Padding = New System.Windows.Forms.Padding(3)
-        Me.allsolvesPlotPG.Size = New System.Drawing.Size(449, 238)
+        Me.allsolvesPlotPG.Size = New System.Drawing.Size(489, 238)
         Me.allsolvesPlotPG.TabIndex = 0
         Me.allsolvesPlotPG.Text = "Plot-AllSolves"
         Me.allsolvesPlotPG.UseVisualStyleBackColor = True
@@ -1059,7 +1059,7 @@ Partial Class mainForm
         Me.recentsolvesDataPG.Location = New System.Drawing.Point(4, 22)
         Me.recentsolvesDataPG.Name = "recentsolvesDataPG"
         Me.recentsolvesDataPG.Padding = New System.Windows.Forms.Padding(3)
-        Me.recentsolvesDataPG.Size = New System.Drawing.Size(449, 238)
+        Me.recentsolvesDataPG.Size = New System.Drawing.Size(489, 238)
         Me.recentsolvesDataPG.TabIndex = 1
         Me.recentsolvesDataPG.Text = "Data-RecentSolves"
         Me.recentsolvesDataPG.UseVisualStyleBackColor = True
@@ -1069,7 +1069,7 @@ Partial Class mainForm
         Me.recentSolvesDataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.recentSolvesDataGrid.Location = New System.Drawing.Point(6, 6)
         Me.recentSolvesDataGrid.Name = "recentSolvesDataGrid"
-        Me.recentSolvesDataGrid.Size = New System.Drawing.Size(440, 226)
+        Me.recentSolvesDataGrid.Size = New System.Drawing.Size(477, 226)
         Me.recentSolvesDataGrid.TabIndex = 0
         '
         'recentSolves_Strip
@@ -1121,11 +1121,12 @@ Partial Class mainForm
         Me.TabControl2.Location = New System.Drawing.Point(12, 12)
         Me.TabControl2.Name = "TabControl2"
         Me.TabControl2.SelectedIndex = 0
-        Me.TabControl2.Size = New System.Drawing.Size(812, 562)
+        Me.TabControl2.Size = New System.Drawing.Size(845, 562)
         Me.TabControl2.TabIndex = 83
         '
         'SpeedSolvePage
         '
+        Me.SpeedSolvePage.BackColor = System.Drawing.Color.LightGray
         Me.SpeedSolvePage.Controls.Add(Me.scrambleLabel)
         Me.SpeedSolvePage.Controls.Add(Me.scrambleButton)
         Me.SpeedSolvePage.Controls.Add(Me.timerLabel)
@@ -1213,10 +1214,9 @@ Partial Class mainForm
         Me.SpeedSolvePage.Location = New System.Drawing.Point(4, 22)
         Me.SpeedSolvePage.Name = "SpeedSolvePage"
         Me.SpeedSolvePage.Padding = New System.Windows.Forms.Padding(3)
-        Me.SpeedSolvePage.Size = New System.Drawing.Size(804, 536)
+        Me.SpeedSolvePage.Size = New System.Drawing.Size(837, 536)
         Me.SpeedSolvePage.TabIndex = 0
         Me.SpeedSolvePage.Text = "Speed Solve"
-        Me.SpeedSolvePage.UseVisualStyleBackColor = True
         '
         'PLLPage
         '
@@ -1260,21 +1260,21 @@ Partial Class mainForm
         '
         'Chart1
         '
-        ChartArea2.Name = "ChartArea1"
-        Me.Chart1.ChartAreas.Add(ChartArea2)
-        Legend2.Name = "Legend1"
-        Me.Chart1.Legends.Add(Legend2)
+        ChartArea6.Name = "ChartArea1"
+        Me.Chart1.ChartAreas.Add(ChartArea6)
+        Legend6.Name = "Legend1"
+        Me.Chart1.Legends.Add(Legend6)
         Me.Chart1.Location = New System.Drawing.Point(6, 17)
         Me.Chart1.Name = "Chart1"
-        Series3.ChartArea = "ChartArea1"
-        Series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline
-        Series3.Legend = "Legend1"
-        Series3.Name = "AllTimes"
-        Series4.ChartArea = "ChartArea1"
-        Series4.Legend = "Legend1"
-        Series4.Name = "HalfTimes"
-        Me.Chart1.Series.Add(Series3)
-        Me.Chart1.Series.Add(Series4)
+        Series11.ChartArea = "ChartArea1"
+        Series11.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline
+        Series11.Legend = "Legend1"
+        Series11.Name = "AllTimes"
+        Series12.ChartArea = "ChartArea1"
+        Series12.Legend = "Legend1"
+        Series12.Name = "HalfTimes"
+        Me.Chart1.Series.Add(Series11)
+        Me.Chart1.Series.Add(Series12)
         Me.Chart1.Size = New System.Drawing.Size(436, 195)
         Me.Chart1.TabIndex = 2
         Me.Chart1.Text = "Chart1"
@@ -1423,7 +1423,7 @@ Partial Class mainForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(827, 578)
+        Me.ClientSize = New System.Drawing.Size(869, 578)
         Me.Controls.Add(Me.TabControl2)
         Me.Name = "mainForm"
         Me.Text = "SpeedTimer"

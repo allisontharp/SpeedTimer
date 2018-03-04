@@ -22,6 +22,7 @@ Public Class CommonFunctions
         mainForm.whiteToday.Text = mysqlquery("SELECT count(*) FROM times WHERE date(date) = current_date AND startcolor = 1")
         mainForm.whiteTotal.Text = mysqlquery("SELECT count(*) FROM times WHERE startcolor = 1")
 
+
         ' Update Yellow Stats
         mainForm.yellowBest.Text = mysqlquery("SELECT min(solvetime) from times WHERE startcolor = 2")
         mainForm.yellowAo5.Text = mysqlquery("SELECT TRUNCATE(avg(x.solvetime),3) FROM (SELECT solvetime FROM times  WHERE startcolor = 2 ORDER BY id DESC LIMIT 5)X")
@@ -62,6 +63,8 @@ Public Class CommonFunctions
         mainForm.orangeToday.Text = mysqlquery("SELECT count(*) FROM times WHERE date(date) = current_date AND startcolor = 6")
         mainForm.orangeTotal.Text = mysqlquery("SELECT count(*) FROM times WHERE startcolor = 6")
 
+        GetWorstA0100()
+
         ' Update Recent Solves Table
 
         Dim query As String = "SELECT t.id, t.date, t.solvetime, c.name AS color FROM times t LEFT JOIN colors c ON c.id = t.startcolor ORDER BY date desc"
@@ -92,6 +95,133 @@ Public Class CommonFunctions
             Catch ex As Exception
                 MsgBox(ex.ToString())
             End Try
+        End If
+
+        query = "SELECT t.solvetime FROM times AS t ORDER BY t.date ASC"
+        adap = New MySqlDataAdapter(query, conn)
+        ds = New DataSet()
+
+        mainForm.totalAvgChart.DataSource = Nothing
+        adap = New MySqlDataAdapter(query, conn)
+
+        adap.Fill(ds)
+        mainForm.totalAvgChart.Series(0).YValueMembers = "solvetime"
+        mainForm.totalAvgChart.DataSource = ds
+
+    End Function
+
+    Public Function GetWorstA0100()
+        Dim worstColor As String
+        Dim query As String = "
+select avg.color
+from (
+SELECT TRUNCATE(avg(t.solvetime),3) as Ao100, t.color
+from 
+(
+			(SELECT solvetime , c.name as color
+			FROM times  as t
+			join colors as c on c.id = t.startcolor
+			WHERE c.name = 'white'
+			ORDER BY t.date DESC 
+			LIMIT 100)
+
+union 
+		(
+			SELECT solvetime , c.name as color
+			FROM times  as t
+			join colors as c on c.id = t.startcolor
+			WHERE c.name = 'yellow'
+			ORDER BY t.date DESC 
+			LIMIT 100
+		)
+		
+union 
+		(
+			SELECT solvetime , c.name as color
+			FROM times  as t
+			join colors as c on c.id = t.startcolor
+			WHERE c.name = 'green'
+			ORDER BY t.date DESC 
+			LIMIT 100
+		)
+		
+union 
+(SELECT solvetime , c.name as color
+			FROM times  as t
+			join colors as c on c.id = t.startcolor
+			WHERE c.name = 'orange'
+			ORDER BY t.date DESC 
+			LIMIT 100)
+
+union 
+		(
+			SELECT solvetime , c.name as color
+			FROM times  as t
+			join colors as c on c.id = t.startcolor
+			WHERE c.name = 'blue'
+			ORDER BY t.date DESC 
+			LIMIT 100
+		)
+		
+union 
+		(
+			SELECT solvetime , c.name as color
+			FROM times  as t
+			join colors as c on c.id = t.startcolor
+			WHERE c.name = 'red'
+			ORDER BY t.date DESC 
+			LIMIT 100
+		)
+
+) as t	
+group by t.color		
+) as avg
+order by avg.ao100 desc 
+limit 1
+"
+        worstColor = mysqlquery(query)
+        If worstColor = "white" Then
+            mainForm.whiteAo100.Font = New Font(mainForm.whiteAo100.Font.SystemFontName, mainForm.whiteAo100.Font.Size, FontStyle.Bold)
+            mainForm.yellowAo100.Font = New Font(mainForm.yellowAo100.Font.SystemFontName, mainForm.yellowAo100.Font.Size, FontStyle.Regular)
+            mainForm.redAo100.Font = New Font(mainForm.redAo100.Font.SystemFontName, mainForm.redAo100.Font.Size, FontStyle.Regular)
+            mainForm.orangeAo100.Font = New Font(mainForm.orangeAo100.Font.SystemFontName, mainForm.orangeAo100.Font.Size, FontStyle.Regular)
+            mainForm.blueAo100.Font = New Font(mainForm.blueAo100.Font.SystemFontName, mainForm.blueAo100.Font.Size, FontStyle.Regular)
+            mainForm.greenAo100.Font = New Font(mainForm.greenAo100.Font.SystemFontName, mainForm.greenAo100.Font.Size, FontStyle.Regular)
+        ElseIf worstColor = "yellow" Then
+            mainForm.whiteAo100.Font = New Font(mainForm.whiteAo100.Font.SystemFontName, mainForm.whiteAo100.Font.Size, FontStyle.Regular)
+            mainForm.yellowAo100.Font = New Font(mainForm.yellowAo100.Font.SystemFontName, mainForm.yellowAo100.Font.Size, FontStyle.Bold)
+            mainForm.redAo100.Font = New Font(mainForm.redAo100.Font.SystemFontName, mainForm.redAo100.Font.Size, FontStyle.Regular)
+            mainForm.orangeAo100.Font = New Font(mainForm.orangeAo100.Font.SystemFontName, mainForm.orangeAo100.Font.Size, FontStyle.Regular)
+            mainForm.blueAo100.Font = New Font(mainForm.blueAo100.Font.SystemFontName, mainForm.blueAo100.Font.Size, FontStyle.Regular)
+            mainForm.greenAo100.Font = New Font(mainForm.greenAo100.Font.SystemFontName, mainForm.greenAo100.Font.Size, FontStyle.Regular)
+        ElseIf worstColor = "red" Then
+            mainForm.whiteAo100.Font = New Font(mainForm.whiteAo100.Font.SystemFontName, mainForm.whiteAo100.Font.Size, FontStyle.Regular)
+            mainForm.yellowAo100.Font = New Font(mainForm.yellowAo100.Font.SystemFontName, mainForm.yellowAo100.Font.Size, FontStyle.Regular)
+            mainForm.redAo100.Font = New Font(mainForm.redAo100.Font.SystemFontName, mainForm.redAo100.Font.Size, FontStyle.Bold)
+            mainForm.orangeAo100.Font = New Font(mainForm.orangeAo100.Font.SystemFontName, mainForm.orangeAo100.Font.Size, FontStyle.Regular)
+            mainForm.blueAo100.Font = New Font(mainForm.blueAo100.Font.SystemFontName, mainForm.blueAo100.Font.Size, FontStyle.Regular)
+            mainForm.greenAo100.Font = New Font(mainForm.greenAo100.Font.SystemFontName, mainForm.greenAo100.Font.Size, FontStyle.Regular)
+        ElseIf worstColor = "orange" Then
+            mainForm.whiteAo100.Font = New Font(mainForm.whiteAo100.Font.SystemFontName, mainForm.whiteAo100.Font.Size, FontStyle.Regular)
+            mainForm.yellowAo100.Font = New Font(mainForm.yellowAo100.Font.SystemFontName, mainForm.yellowAo100.Font.Size, FontStyle.Regular)
+            mainForm.redAo100.Font = New Font(mainForm.redAo100.Font.SystemFontName, mainForm.redAo100.Font.Size, FontStyle.Regular)
+            mainForm.orangeAo100.Font = New Font(mainForm.orangeAo100.Font.SystemFontName, mainForm.orangeAo100.Font.Size, FontStyle.Bold)
+            mainForm.blueAo100.Font = New Font(mainForm.blueAo100.Font.SystemFontName, mainForm.blueAo100.Font.Size, FontStyle.Regular)
+            mainForm.greenAo100.Font = New Font(mainForm.greenAo100.Font.SystemFontName, mainForm.greenAo100.Font.Size, FontStyle.Regular)
+        ElseIf worstColor = "blue" Then
+            mainForm.whiteAo100.Font = New Font(mainForm.whiteAo100.Font.SystemFontName, mainForm.whiteAo100.Font.Size, FontStyle.Regular)
+            mainForm.yellowAo100.Font = New Font(mainForm.yellowAo100.Font.SystemFontName, mainForm.yellowAo100.Font.Size, FontStyle.Regular)
+            mainForm.redAo100.Font = New Font(mainForm.redAo100.Font.SystemFontName, mainForm.redAo100.Font.Size, FontStyle.Regular)
+            mainForm.orangeAo100.Font = New Font(mainForm.orangeAo100.Font.SystemFontName, mainForm.orangeAo100.Font.Size, FontStyle.Regular)
+            mainForm.blueAo100.Font = New Font(mainForm.blueAo100.Font.SystemFontName, mainForm.blueAo100.Font.Size, FontStyle.Bold)
+            mainForm.greenAo100.Font = New Font(mainForm.greenAo100.Font.SystemFontName, mainForm.greenAo100.Font.Size, FontStyle.Regular)
+        ElseIf worstColor = "green" Then
+            mainForm.whiteAo100.Font = New Font(mainForm.whiteAo100.Font.SystemFontName, mainForm.whiteAo100.Font.Size, FontStyle.Regular)
+            mainForm.yellowAo100.Font = New Font(mainForm.yellowAo100.Font.SystemFontName, mainForm.yellowAo100.Font.Size, FontStyle.Regular)
+            mainForm.redAo100.Font = New Font(mainForm.redAo100.Font.SystemFontName, mainForm.redAo100.Font.Size, FontStyle.Regular)
+            mainForm.orangeAo100.Font = New Font(mainForm.orangeAo100.Font.SystemFontName, mainForm.orangeAo100.Font.Size, FontStyle.Regular)
+            mainForm.blueAo100.Font = New Font(mainForm.blueAo100.Font.SystemFontName, mainForm.blueAo100.Font.Size, FontStyle.Regular)
+            mainForm.greenAo100.Font = New Font(mainForm.greenAo100.Font.SystemFontName, mainForm.greenAo100.Font.Size, FontStyle.Bold)
         End If
 
     End Function
